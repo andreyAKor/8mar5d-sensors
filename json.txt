@@ -1,0 +1,128 @@
+*** Получение информации о контроллере. ***
+
+Запрос:
+	/info
+
+Ответ:
+	{
+		"status": "ok",
+		"data": {
+			"type": "AVR",
+			"controller": "Arduino Nano 3.0",
+			"types": ["sensors"],
+			"version": 1,
+			"sensors": [{
+				"type": "DHT-11",
+				"version": 1
+			}, {
+				"type": "MQ-2",
+				"version": 1
+			}]
+		}
+	}
+
+Минимизированный:
+	{"status":"ok","data":{"type":"AVR","controller":"Arduino Nano 3.0","types":["sensors"],"version":1,"sensors":[{"type":"DHT-11","version":1},{"type":"MQ-2","version":1}]}}
+
+Минимизированный с параметрами:
+	{"status":"ok","data":{"type":"AVR","controller":"Arduino Nano 3.0","types":["sensors"],"version":1,"sensors":[{"type":"DHT-11","version":1},{"type":"MQ-2","version":1}]}}
+
+
+*** Получение метрик сенсора DHT-11 ***
+
+Запрос:
+	/sensor/DHT-11
+
+Ответ положительный:
+	{
+		"status": "ok",
+		"data": {
+			"temperature": {
+				"value": 9.61,
+				"measure": "C"
+			},
+			"humidity": {
+				"value": 45.6,
+				"measure": "%"
+			}
+		}
+	}
+
+Минимизированный:
+	{"status":"ok","data":{"temperature":{"value":9.61,"measure":"C"},"humidity":{"value":45.6,"measure":"%"}}}
+
+Минимизированный с параметрами:
+	{"status":"ok","data":{"temperature":{"value":%s,"measure":"C"},"humidity":{"value":%s,"measure":"%%"}}}
+
+
+*** Получение метрик сенсора MQ-2 ***
+
+Запрос:
+	/sensor/MQ-2
+
+Ответ положительный:
+	{
+		"status": "ok",
+		"data": {
+			"ratio": {
+				"value": 9.61,
+				"measure": ""
+			},
+			"lpg": {
+				"value": 5,
+				"measure": "ppm"
+			},
+			"methane": {
+				"value": 12,
+				"measure": "ppm"
+			},
+			"smoke": {
+				"value": 22,
+				"measure": "ppm"
+			},
+			"hydrogen": {
+				"value": 10,
+				"measure": "ppm"
+			}
+		}
+	}
+
+Минимизированный:
+	{"status":"ok","data":{"ratio":{"value":9.61,"measure":""},"lpg":{"value":5,"measure":"ppm"},"methane":{"value":12,"measure":"ppm"},"smoke":{"value":22,"measure":"ppm"},"hydrogen":{"value":10,"measure":"ppm"}}}
+
+Минимизированный с параметрами:
+	{"status":"ok","data":{"ratio":{"value":%s,"measure":null},"lpg":{"value":%u,"measure":"ppm"},"methane":{"value":%u,"measure":"ppm"},"smoke":{"value":%u,"measure":"ppm"},"hydrogen":{"value":%u,"measure":"ppm"}}}
+
+*** Вывод ошибки ***
+
+Ответ:
+	{
+		"status": "error",
+		"code": 123,
+		"message": ""
+	}
+
+Минимизированный:
+	{"status":"error","code":123,"message":""}
+
+Минимизированный с параметрами:
+	{"status":"error","code":%u,"message":"%s"}
+
+------
+
+{"status":"ok","data":{"ratio":{"value":%s,"measure":null},"lpg":{"value":%u,"measure":"ppm"},"methane":{"value":%u,"measure":"ppm"},"smoke":{"value":%u,"measure":"ppm"},"hydrogen":{"value":%u,"measure":"ppm"}}}
+
+
+
+
+Ratio: 9.61
+LPG: 5 ppm
+Methane: 12 ppm
+Smoke: 22 ppm
+Hydrogen: 10 ppm
+
+
+Ratio: 9.61	LPG: 5 ppm	Methane: 13 ppm	Smoke: 24 ppm	Hydrogen: 9 ppm
+Ratio: 9.39	LPG: 4 ppm	Methane: 12 ppm	Smoke: 22 ppm	Hydrogen: 9 ppm
+Ratio: 8.95	LPG: 4 ppm	Methane: 12 ppm	Smoke: 23 ppm	Hydrogen: 10 ppm
+Ratio: 9.61	LPG: 4 ppm	Methane: 12 ppm	Smoke: 22 ppm	Hydrogen: 9 ppm
